@@ -1,0 +1,71 @@
+﻿<Window x:Class="WorkWithThreadsWinApi.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Threads" Height="600" Width="900"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:viewModels="clr-namespace:WorkWithThreadsWinApi"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:oxy="http://oxyplot.org/wpf"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance viewModels:MainVm}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="290"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <Button Margin="10"
+                Command="{Binding AddThreadCommand}"
+                Content="Add"/>
+
+        <ScrollViewer Grid.Row="1"
+                      Grid.Column="0"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Auto">
+            <ListView ItemsSource="{Binding Threads}"
+                      SelectedItem="{Binding SelectedThread}"
+                      MaxHeight="190"
+                      Margin="10">
+                <ListView.View>
+                    <GridView >
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Id}"
+                                    Width="Auto"
+                                    Header="Id"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Priority}"
+                                    Width="Auto"
+                                    Header="Priority"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=ThreadTime}" 
+                                    Width="Auto"
+                                    Header="ThreadTime"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </ScrollViewer>
+        
+        <StackPanel Grid.Column="0"
+                    Grid.Row="2">
+            <Button Margin="10"
+                    Command="{Binding DeleteThreadCommand}"
+                    Content="Delete"/>
+            
+            <ComboBox Margin="10"
+                      ItemsSource="{Binding ThreadPriorities}"
+                      SelectedItem="{Binding SelectedThreadPriority}"/>
+            
+            <Button Margin="10,1,10,10"
+                    Command="{Binding SetThreadPriorityCommand}"
+                    Content="Set Priority"/>
+        </StackPanel>
+
+        <ScrollViewer Grid.RowSpan="3"
+                      Grid.Column="1"
+                      Grid.Row="0">
+            <oxy:PlotView Model="{Binding ThreadPlotModel}"/>
+        </ScrollViewer>
+    </Grid>
+</Window>
