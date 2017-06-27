@@ -20,3 +20,6 @@ D:\CODE\CodeDevelop\Си шарпный\WorkWithThreadsWinApi\WorkWithThreadsWin
 D:\CODE\CodeDevelop\Си шарпный\WorkWithThreadsWinApi\WorkWithThreadsWinApi\obj\Debug\WorkWithThreadsWinApi.csproj.GenerateResource.Cache
 D:\CODE\CodeDevelop\Си шарпный\WorkWithThreadsWinApi\WorkWithThreadsWinApi\obj\Debug\WorkWithThreadsWinApi.exe
 D:\CODE\CodeDevelop\Си шарпный\WorkWithThreadsWinApi\WorkWithThreadsWinApi\obj\Debug\WorkWithThreadsWinApi.pdb
+X:\Projects\WINAPIThreads\WinApi-Threads\WorkWithThreadsWinApi\bin\Debug\WorkWithThreadsWinApi.exe.config
+X:\Projects\WINAPIThreads\WinApi-Threads\WorkWithThreadsWinApi\obj\Debug\WorkWithThreadsWinApi.exe
+X:\Projects\WINAPIThreads\WinApi-Threads\WorkWithThreadsWinApi\obj\Debug\WorkWithThreadsWinApi.pdb
