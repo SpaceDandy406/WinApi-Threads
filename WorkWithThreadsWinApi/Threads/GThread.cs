@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace WorkWithThreadsWinApi.Threads
@@ -10,10 +11,10 @@ namespace WorkWithThreadsWinApi.Threads
         private double _lastProcTimeValue;
         private double _lastThreadTimeValue;
 
-        public ThreadPriority Priority
+        public ThreadPriorityLevel Priority
         {
-            get { return WinApiHelper.GetThreadPriority(Handle); }
-            set { WinApiHelper.SetThreadPriority(Handle, (int)value); }
+            get { return DiagnosticHelper.GetThreadPriority(Id); }
+            set { DiagnosticHelper.SetThreadPriority(Id, value); }
         }
         public uint Id { get; private set; }
         public uint Handle { get; private set; }

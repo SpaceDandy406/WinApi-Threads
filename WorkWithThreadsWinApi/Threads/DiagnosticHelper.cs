@@ -59,5 +59,43 @@ namespace WorkWithThreadsWinApi.Threads
 
             thread.ProcessorAffinity = (IntPtr) 1;
         }
+
+        public static void SetNativeThreadAffinity()
+        {
+            var process = Process.GetCurrentProcess();
+
+            foreach (ProcessThread thread in process.Threads)
+            {
+                thread.ProcessorAffinity = (IntPtr)2;    
+            }
+        }
+
+        public static void SetThreadPriority(uint id, ThreadPriorityLevel priorityLevel)
+        {
+            var process = Process.GetCurrentProcess();
+
+            var thread = process.Threads
+                .Cast<ProcessThread>()
+                .FirstOrDefault(t => t.Id == id);
+
+            if (thread == null)
+                throw new ArgumentOutOfRangeException();
+
+            thread.PriorityLevel = priorityLevel;
+        }
+
+        public static ThreadPriorityLevel GetThreadPriority(uint id)
+        {
+            var process = Process.GetCurrentProcess();
+
+            var thread = process.Threads
+                .Cast<ProcessThread>()
+                .FirstOrDefault(t => t.Id == id);
+
+            if (thread == null)
+                throw new ArgumentOutOfRangeException();
+
+            return thread.PriorityLevel;
+        }
     }
 }

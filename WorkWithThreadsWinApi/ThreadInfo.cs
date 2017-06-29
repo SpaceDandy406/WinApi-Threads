@@ -1,4 +1,5 @@
-﻿using MVVMLiba;
+﻿using System.Diagnostics;
+using MVVMLiba;
 using WorkWithThreadsWinApi.Threads;
 
 namespace WorkWithThreadsWinApi
@@ -8,7 +9,7 @@ namespace WorkWithThreadsWinApi
         private readonly GThread _innerThread;
 
         private uint _id;
-        private ThreadPriority _priority;
+        private ThreadPriorityLevel _priority;
         private int _procUsage;
 
         public uint Id
@@ -20,7 +21,7 @@ namespace WorkWithThreadsWinApi
                 OnPropertyChanged();
             }
         }
-        public ThreadPriority Priority
+        public ThreadPriorityLevel Priority
         {
             get { return _priority; }
             set

@@ -6,6 +6,7 @@ using System.Threading;
 using System.Windows.Input;
 using MVVMLiba;
 using OxyPlot;
+using WorkWithThreadsWinApi.Threads;
 using ThreadPriority = WorkWithThreadsWinApi.Threads.ThreadPriority;
 
 namespace WorkWithThreadsWinApi
@@ -15,8 +16,8 @@ namespace WorkWithThreadsWinApi
         private readonly object _locker = new object();
         private ObservableCollection<ThreadInfo> _threads;
         private ThreadInfo _selectedthread;
-        private ObservableCollection<ThreadPriority> _threadPriorities;
-        private ThreadPriority _selectedThreadPriority;
+        private ObservableCollection<ThreadPriorityLevel> _threadPriorities;
+        private ThreadPriorityLevel _selectedThreadPriority;
         private PlotModel _threadPlotModel;
 
         private Timer _timer;
@@ -46,7 +47,7 @@ namespace WorkWithThreadsWinApi
             }
         }
 
-        public ObservableCollection<ThreadPriority> ThreadPriorities
+        public ObservableCollection<ThreadPriorityLevel> ThreadPriorities
         {
             get
             {
@@ -59,7 +60,7 @@ namespace WorkWithThreadsWinApi
             }
         }
 
-        public ThreadPriority SelectedThreadPriority
+        public ThreadPriorityLevel SelectedThreadPriority
         {
             get
             {
@@ -89,6 +90,8 @@ namespace WorkWithThreadsWinApi
         {
             Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.High;
             Thread.CurrentThread.Priority = System.Threading.ThreadPriority.Highest;
+            
+            DiagnosticHelper.SetNativeThreadAffinity();
 
             _dataFormer = new PlotDataFormer();
 
@@ -96,7 +99,7 @@ namespace WorkWithThreadsWinApi
             ThreadPlotModel = new PlotModel();
             ThreadPriorities = GetPriorities();
 
-            _timer = new Timer(Loop, null, 1000, 1000);
+            _timer = new Timer(Loop, null, 1000, 3000);
         }
 
         private void Loop(object obj)
@@ -170,13 +173,13 @@ namespace WorkWithThreadsWinApi
             }
         }
 
-        private static ObservableCollection<ThreadPriority> GetPriorities()
+        private static ObservableCollection<ThreadPriorityLevel> GetPriorities()
         {
-            var list = Enum.GetValues(typeof(ThreadPriority))
-                .Cast<ThreadPriority>()
+            var list = Enum.GetValues(typeof(ThreadPriorityLevel))
+                .Cast<ThreadPriorityLevel>()
                 .ToList();
 
-            return new ObservableCollection<ThreadPriority>(list);
+            return new ObservableCollection<ThreadPriorityLevel>(list);
         }
     }
 }

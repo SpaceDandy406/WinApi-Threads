@@ -38,6 +38,9 @@ namespace WorkWithThreadsWinApi
 
         public void RefreshPlotModel(List<ThreadInfo> threadInfos, PlotModel threadPlotModel)
         {
+            threadPlotModel.Series.Clear();
+            threadPlotModel.Axes.Clear();
+
             if (!threadInfos.Any())
                 return;
 
@@ -49,9 +52,6 @@ namespace WorkWithThreadsWinApi
                 times.Add(new BarItem(threadInfo.ProcUsage));
                 ids.Add(threadInfo.Id.ToString());
             }
-
-            threadPlotModel.Series.Clear();
-            threadPlotModel.Axes.Clear();
 
             threadPlotModel.Series.Add(new BarSeries { ItemsSource = times });
 
