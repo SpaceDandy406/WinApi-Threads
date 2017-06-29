@@ -1,32 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Windows.Input;
-using System.Windows.Threading;
 using MVVMLiba;
 using OxyPlot;
-using WorkWithThreadsWinApi.Threads;
 using ThreadPriority = WorkWithThreadsWinApi.Threads.ThreadPriority;
 
 namespace WorkWithThreadsWinApi
 {
     internal class MainVm : BaseViewModel
     {
-        private Dispatcher _dispatcher;
-
+        private readonly object _locker = new object();
         private ObservableCollection<ThreadInfo> _threads;
         private ThreadInfo _selectedthread;
         private ObservableCollection<ThreadPriority> _threadPriorities;
         private ThreadPriority _selectedThreadPriority;
         private PlotModel _threadPlotModel;
 
-        private List<GThread> _gThreads;
         private Timer _timer;
         private readonly PlotDataFormer _dataFormer;
-        private readonly PiCounter _piCounter;
 
         private ICommand _addThreadCommand;
         private ICommand _deleteThreadCommand;
@@ -93,39 +87,29 @@ namespace WorkWithThreadsWinApi
 
         public MainVm()
         {
-            Process.GetCurrentProcess().ProcessorAffinity = (IntPtr) 1;
+            Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.High;
+            Thread.CurrentThread.Priority = System.Threading.ThreadPriority.Highest;
 
-            _dispatcher = Dispatcher.CurrentDispatcher;
             _dataFormer = new PlotDataFormer();
-            _gThreads = new List<GThread>();
-            _piCounter = new PiCounter();
 
             Threads = new ObservableCollection<ThreadInfo>();
-            SelectedThread = new ThreadInfo();
             ThreadPlotModel = new PlotModel();
             ThreadPriorities = GetPriorities();
 
-            //_timer = new Timer(Loop, null, 1000, 1000);
+            _timer = new Timer(Loop, null, 1000, 1000);
         }
 
-        private void Loop(object state)
+        private void Loop(object obj)
         {
-            _dispatcher.Invoke(Loop1);
-        }
-
-        private void Loop1()
-        {
-            Threads = new ObservableCollection<ThreadInfo>();
-
-            foreach (var gThread in _gThreads)
+            lock (_locker)
             {
-                Threads.Add(new ThreadInfo { Id = gThread.Id, Priority = gThread.Priority, ThreadTime = gThread.ThreadTime });
-            }
+                foreach (var threadInfo in Threads)
+                {
+                    threadInfo.Refresh();
+                }
 
-            //Debug.WriteLine(_gThreads.Count);
-            
-            ThreadPlotModel = _dataFormer.GetPlotModel(Threads.ToList());
-            //Thread.Sleep(500);
+                _dataFormer.RefreshPlotModel(Threads.ToList(), ThreadPlotModel);
+            }
         }
 
         public ICommand AddThreadCommand
@@ -140,37 +124,50 @@ namespace WorkWithThreadsWinApi
 
         public ICommand SetThreadPriorityCommand
         {
-            get { return _setThreadPriorityCommand ?? new RelayCommand(DeleteThread); }
+            get { return _setThreadPriorityCommand ?? new RelayCommand(SetThreadPriority); }
         }
 
         private void AddThread(object obj)
         {
-            var thread = new GThread();
-            _gThreads.Add(thread);
-            thread.Start();
-            Loop1();
+            lock (_locker)
+            {
+                Threads.Add(new ThreadInfo());
+            }
         }
 
         private void DeleteThread(object obj)
         {
-            var id = SelectedThread.Id;
+            lock (_locker)
+            {
+                if (SelectedThread == null)
+                    return;
 
-            var thread = _gThreads.Find(t => t.Id == id);
+                var id = SelectedThread.Id;
 
-            if (thread == null)
-                return;
+                var thread = Threads.First(info => info.Id == id);
 
-            _gThreads.Remove(thread);
+                if (thread == null)
+                    return;
 
-            thread.DestroyGThread();
-            //thread = null;
+                Threads.Remove(thread);
 
-            Loop1();
+                thread.Destruct();
+            }
         }
 
         private void SetThreadPriority(object obj)
         {
+            lock (_locker)
+            {
+                if (SelectedThread == null)
+                    return;
 
+                var id = SelectedThread.Id;
+
+                var thread = Threads.First(info => info.Id == id);
+
+                thread.Priority = SelectedThreadPriority;
+            }
         }
 
         private static ObservableCollection<ThreadPriority> GetPriorities()

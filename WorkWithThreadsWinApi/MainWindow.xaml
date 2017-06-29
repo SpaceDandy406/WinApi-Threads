@@ -15,7 +15,7 @@
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="290"></ColumnDefinition>
+            <ColumnDefinition Width="350"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         
@@ -39,9 +39,9 @@
                         <GridViewColumn DisplayMemberBinding="{Binding Path=Priority}"
                                     Width="Auto"
                                     Header="Priority"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=ThreadTime}" 
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=ProcUsage}" 
                                     Width="Auto"
-                                    Header="ThreadTime"/>
+                                    Header="ProcUsage"/>
                     </GridView>
                 </ListView.View>
             </ListView>

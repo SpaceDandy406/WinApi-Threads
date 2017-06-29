@@ -21,7 +21,7 @@ namespace WorkWithThreadsWinApi.Threads
     internal static class WinApiHelper
     {
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        public static extern unsafe uint CreateThread(
+        public static extern uint CreateThread(
                 IntPtr lpThreadAttributes,
                 uint dwStackSize,
                 IntPtr lpStartAddress,

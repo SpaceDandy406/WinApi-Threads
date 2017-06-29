@@ -1,14 +1,15 @@
-﻿using System;
-using MVVMLiba;
+﻿using MVVMLiba;
 using WorkWithThreadsWinApi.Threads;
 
 namespace WorkWithThreadsWinApi
 {
     internal class ThreadInfo : BaseViewModel
     {
+        private readonly GThread _innerThread;
+
         private uint _id;
         private ThreadPriority _priority;
-        private TimeSpan _threadTime;
+        private int _procUsage;
 
         public uint Id
         {
@@ -19,25 +20,43 @@ namespace WorkWithThreadsWinApi
                 OnPropertyChanged();
             }
         }
-
         public ThreadPriority Priority
         {
             get { return _priority; }
             set
             {
                 _priority = value;
+                _innerThread.Priority = value;
+                OnPropertyChanged();
+            }
+        }
+        public int ProcUsage
+        {
+            get { return _procUsage; }
+            set
+            {
+                _procUsage = value;
                 OnPropertyChanged();
             }
         }
 
-        public TimeSpan ThreadTime
+        public ThreadInfo()
         {
-            get { return _threadTime; }
-            set
-            {
-                _threadTime = value;
-                OnPropertyChanged();
-            }
+            _innerThread = new GThread();
+            _innerThread.Start();
+
+            Id = _innerThread.Id;
+        }
+
+        public void Destruct()
+        {
+            _innerThread.DestroyGThread();
+        }
+
+        public void Refresh()
+        {
+            Priority = _innerThread.Priority;
+            ProcUsage = _innerThread.ProcUsage;
         }
     }
 }

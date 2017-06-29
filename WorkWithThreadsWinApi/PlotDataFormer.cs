@@ -20,7 +20,7 @@ namespace WorkWithThreadsWinApi
 
             foreach (var threadInfo in threadInfos)
             {
-                times.Add(new BarItem(threadInfo.ThreadTime.TotalMilliseconds));
+                times.Add(new BarItem(threadInfo.ProcUsage));
                 ids.Add(threadInfo.Id.ToString());
             }
 
@@ -34,6 +34,41 @@ namespace WorkWithThreadsWinApi
             });
 
             return plotModel;
+        }
+
+        public void RefreshPlotModel(List<ThreadInfo> threadInfos, PlotModel threadPlotModel)
+        {
+            if (!threadInfos.Any())
+                return;
+
+            var times = new List<BarItem>();
+            var ids = new List<string>();
+
+            foreach (var threadInfo in threadInfos)
+            {
+                times.Add(new BarItem(threadInfo.ProcUsage));
+                ids.Add(threadInfo.Id.ToString());
+            }
+
+            threadPlotModel.Series.Clear();
+            threadPlotModel.Axes.Clear();
+
+            threadPlotModel.Series.Add(new BarSeries { ItemsSource = times });
+
+            threadPlotModel.Axes.Add(new CategoryAxis
+            {
+                Position = AxisPosition.Left,
+                Key = "CakeAxis",
+                ItemsSource = ids
+            });
+            threadPlotModel.Axes.Add(new LinearAxis
+            {
+                Position = AxisPosition.Bottom,
+                Minimum = 0,
+                Maximum = 100
+            });
+
+            threadPlotModel.InvalidatePlot(true);
         }
     }
 }
