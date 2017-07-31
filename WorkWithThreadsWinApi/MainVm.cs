@@ -7,7 +7,6 @@ using System.Windows.Input;
 using MVVMLiba;
 using OxyPlot;
 using WorkWithThreadsWinApi.Threads;
-using ThreadPriority = WorkWithThreadsWinApi.Threads.ThreadPriority;
 
 namespace WorkWithThreadsWinApi
 {
@@ -90,7 +89,7 @@ namespace WorkWithThreadsWinApi
         {
             Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.High;
             Thread.CurrentThread.Priority = System.Threading.ThreadPriority.Highest;
-            
+
             DiagnosticHelper.SetNativeThreadAffinity();
 
             _dataFormer = new PlotDataFormer();
@@ -99,7 +98,7 @@ namespace WorkWithThreadsWinApi
             ThreadPlotModel = new PlotModel();
             ThreadPriorities = GetPriorities();
 
-            _timer = new Timer(Loop, null, 1000, 3000);
+            _timer = new Timer(Loop, null, 1000, 1000);
         }
 
         private void Loop(object obj)
@@ -154,7 +153,8 @@ namespace WorkWithThreadsWinApi
 
                 Threads.Remove(thread);
 
-                thread.Destruct();
+                thread.StopThread();
+                thread.Dispose();
             }
         }
 

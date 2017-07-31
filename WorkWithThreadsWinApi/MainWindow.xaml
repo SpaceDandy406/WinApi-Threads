@@ -33,15 +33,18 @@
                       Margin="10">
                 <ListView.View>
                     <GridView >
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Id}"
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Id, Mode=OneWay}"
                                     Width="Auto"
                                     Header="Id"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Priority}"
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Priority, Mode=OneWay}"
                                     Width="Auto"
                                     Header="Priority"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=ProcUsage}" 
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=ProcUsage, Mode=OneWay}" 
                                     Width="Auto"
                                     Header="ProcUsage"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Pi, Mode=OneWay}" 
+                                    Width="Auto"
+                                    Header="Pi"/>
                     </GridView>
                 </ListView.View>
             </ListView>

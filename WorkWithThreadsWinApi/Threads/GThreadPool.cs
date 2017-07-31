@@ -29,7 +29,7 @@ namespace WorkWithThreadsWinApi.Threads
                     continue;
 
                 _threads.Remove(thread);
-                thread.Destruct();
+                thread.StopThread();
             }
 
             return _threads;

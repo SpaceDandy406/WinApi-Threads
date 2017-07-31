@@ -66,6 +66,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ColorPicker.cs" />
     <Compile Include="PiCounter.cs" />
     <Compile Include="PlotDataFormer.cs" />
     <Compile Include="ThreadDelegate.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Threads\GThread.cs" />
     <Compile Include="Threads\DiagnosticHelper.cs" />
     <Compile Include="Threads\GThreadPool.cs" />
+    <Compile Include="Threads\ThreadParameter.cs" />
     <Compile Include="Threads\WinApiHelper.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

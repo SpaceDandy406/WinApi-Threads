@@ -5,8 +5,10 @@
         public MainWindow()
         {
             InitializeComponent();
-            
-            DataContext = new MainVm();
+
+            var vm = new MainVm();
+
+            DataContext = vm;
         }
     }
 }
