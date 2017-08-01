@@ -41,3 +41,24 @@ X:\Projects\WINAPIThreads\WinApi-Threads\WorkWithThreadsWinApi\obj\Debug\MainWin
 X:\Projects\WINAPIThreads\WinApi-Threads\WorkWithThreadsWinApi\obj\Debug\WorkWithThreadsWinApi.g.resources
 X:\Projects\WINAPIThreads\WinApi-Threads\WorkWithThreadsWinApi\obj\Debug\WorkWithThreadsWinApi.Properties.Resources.resources
 X:\Projects\WINAPIThreads\WinApi-Threads\WorkWithThreadsWinApi\obj\Debug\WorkWithThreadsWinApi.csproj.GenerateResource.Cache
+D:\CODE\CodeDevelop\Си шарпный\WorkWithThreadsWinApi\WinApi-Threads\WorkWithThreadsWinApi\bin\Debug\WorkWithThreadsWinApi.exe.config
+D:\CODE\CodeDevelop\Си шарпный\WorkWithThreadsWinApi\WinApi-Threads\WorkWithThreadsWinApi\obj\Debug\WorkWithThreadsWinApi.exe
+D:\CODE\CodeDevelop\Си шарпный\WorkWithThreadsWinApi\WinApi-Threads\WorkWithThreadsWinApi\obj\Debug\WorkWithThreadsWinApi.pdb
+D:\CODE\CodeDevelop\Си шарпный\WorkWithThreadsWinApi\WinApi-Threads\WorkWithThreadsWinApi\bin\Debug\WorkWithThreadsWinApi.exe
+D:\CODE\CodeDevelop\Си шарпный\WorkWithThreadsWinApi\WinApi-Threads\WorkWithThreadsWinApi\bin\Debug\WorkWithThreadsWinApi.pdb
+D:\CODE\CodeDevelop\Си шарпный\WorkWithThreadsWinApi\WinApi-Threads\WorkWithThreadsWinApi\bin\Debug\OxyPlot.dll
+D:\CODE\CodeDevelop\Си шарпный\WorkWithThreadsWinApi\WinApi-Threads\WorkWithThreadsWinApi\bin\Debug\OxyPlot.Wpf.dll
+D:\CODE\CodeDevelop\Си шарпный\WorkWithThreadsWinApi\WinApi-Threads\WorkWithThreadsWinApi\bin\Debug\MVVMLiba.pdb
+D:\CODE\CodeDevelop\Си шарпный\WorkWithThreadsWinApi\WinApi-Threads\WorkWithThreadsWinApi\bin\Debug\OxyPlot.pdb
+D:\CODE\CodeDevelop\Си шарпный\WorkWithThreadsWinApi\WinApi-Threads\WorkWithThreadsWinApi\bin\Debug\OxyPlot.xml
+D:\CODE\CodeDevelop\Си шарпный\WorkWithThreadsWinApi\WinApi-Threads\WorkWithThreadsWinApi\bin\Debug\OxyPlot.Wpf.pdb
+D:\CODE\CodeDevelop\Си шарпный\WorkWithThreadsWinApi\WinApi-Threads\WorkWithThreadsWinApi\bin\Debug\OxyPlot.Wpf.xml
+D:\CODE\CodeDevelop\Си шарпный\WorkWithThreadsWinApi\WinApi-Threads\WorkWithThreadsWinApi\obj\Debug\WorkWithThreadsWinApi.csprojResolveAssemblyReference.cache
+D:\CODE\CodeDevelop\Си шарпный\WorkWithThreadsWinApi\WinApi-Threads\WorkWithThreadsWinApi\obj\Debug\MainWindow.g.cs
+D:\CODE\CodeDevelop\Си шарпный\WorkWithThreadsWinApi\WinApi-Threads\WorkWithThreadsWinApi\obj\Debug\App.g.cs
+D:\CODE\CodeDevelop\Си шарпный\WorkWithThreadsWinApi\WinApi-Threads\WorkWithThreadsWinApi\obj\Debug\WorkWithThreadsWinApi_MarkupCompile.cache
+D:\CODE\CodeDevelop\Си шарпный\WorkWithThreadsWinApi\WinApi-Threads\WorkWithThreadsWinApi\obj\Debug\WorkWithThreadsWinApi_MarkupCompile.lref
+D:\CODE\CodeDevelop\Си шарпный\WorkWithThreadsWinApi\WinApi-Threads\WorkWithThreadsWinApi\obj\Debug\MainWindow.baml
+D:\CODE\CodeDevelop\Си шарпный\WorkWithThreadsWinApi\WinApi-Threads\WorkWithThreadsWinApi\obj\Debug\WorkWithThreadsWinApi.g.resources
+D:\CODE\CodeDevelop\Си шарпный\WorkWithThreadsWinApi\WinApi-Threads\WorkWithThreadsWinApi\obj\Debug\WorkWithThreadsWinApi.Properties.Resources.resources
+D:\CODE\CodeDevelop\Си шарпный\WorkWithThreadsWinApi\WinApi-Threads\WorkWithThreadsWinApi\obj\Debug\WorkWithThreadsWinApi.csproj.GenerateResource.Cache

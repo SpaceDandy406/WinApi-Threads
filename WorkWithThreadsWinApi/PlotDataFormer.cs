@@ -12,7 +12,7 @@ namespace WorkWithThreadsWinApi
 
         public PlotModel GetPlotModel(List<ThreadInfo> threadInfos)
         {
-            var colorPicker = new ColorPicker();
+            //var colorPicker = new ColorPicker();
 
             ReverseList(threadInfos);
 
@@ -21,76 +21,76 @@ namespace WorkWithThreadsWinApi
             if (!threadInfos.Any())
                 return plotModel;
 
-            foreach (var threadInfo in threadInfos)
-            {
-                var temp = new List<int> { threadInfo.ProcUsage };
-                _values.Add(temp);
-            }
-
-            //var times = new List<BarItem>();
-            //var ids = new List<string>();
-
             //foreach (var threadInfo in threadInfos)
             //{
-            //    times.Add(new BarItem(threadInfo.ProcUsage));
-            //    ids.Add(threadInfo.Id.ToString());
+            //    var temp = new List<int> { threadInfo.ProcUsage };
+            //    _values.Add(temp);
             //}
 
-            //plotModel.Series.Add(new BarSeries { ItemsSource = times });
+            var times = new List<BarItem>();
+            var ids = new List<string>();
 
-            //plotModel.Axes.Add(new CategoryAxis
-            //{
-            //    Position = AxisPosition.Left,
-            //    Key = "CakeAxis",
-            //    ItemsSource = ids
-            //});
-
-            var linearSeries = new List<LineSeries>();
-
-            for (var i = 0; i < _values.Count; i++)
+            foreach (var threadInfo in threadInfos)
             {
-                var graph = _values[i];
-                for (var j = 0; j < graph.Count; j++)
-                {
-                    linearSeries[i].Points.Add(new DataPoint(j, graph[j]));
-                }
+                times.Add(new BarItem(threadInfo.ProcUsage));
+                ids.Add(threadInfo.Id.ToString());
             }
 
-            for (var i = 0; i < linearSeries.Count; i++)
-            {
-                linearSeries[i].Color = colorPicker.GetNextColor();
-                linearSeries[i].Title = threadInfos[i].Id.ToString();
-            }
+            plotModel.Series.Add(new BarSeries { ItemsSource = times });
 
-            foreach (var series in linearSeries)
-            {
-                plotModel.Series.Add(series);
-            }
-
-            plotModel.Axes.Add(new LinearAxis
+            plotModel.Axes.Add(new CategoryAxis
             {
                 Position = AxisPosition.Left,
                 Key = "CakeAxis",
-                Minimum = 0,
-                AbsoluteMaximum = 100,
-                AbsoluteMinimum = 0,
-                Maximum = 100
+                ItemsSource = ids
             });
-            plotModel.Axes.Add(new LinearAxis
-            {
-                Position = AxisPosition.Bottom,
-                Minimum = 0,
-                Maximum = 50,
-                AbsoluteMinimum = 0,
-                AbsoluteMaximum = 50
-            });
+
+            //var linearSeries = new List<LineSeries>();
+
+            //for (var i = 0; i < _values.Count; i++)
+            //{
+            //    var graph = _values[i];
+            //    for (var j = 0; j < graph.Count; j++)
+            //    {
+            //        linearSeries[i].Points.Add(new DataPoint(j, graph[j]));
+            //    }
+            //}
+
+            //for (var i = 0; i < linearSeries.Count; i++)
+            //{
+            //    linearSeries[i].Color = colorPicker.GetNextColor();
+            //    linearSeries[i].Title = threadInfos[i].Id.ToString();
+            //}
+
+            //foreach (var series in linearSeries)
+            //{
+            //    plotModel.Series.Add(series);
+            //}
+
+            //plotModel.Axes.Add(new LinearAxis
+            //{
+            //    Position = AxisPosition.Left,
+            //    Key = "CakeAxis",
+            //    Minimum = 0,
+            //    AbsoluteMaximum = 100,
+            //    AbsoluteMinimum = 0,
+            //    Maximum = 100
+            //});
+            //plotModel.Axes.Add(new LinearAxis
+            //{
+            //    Position = AxisPosition.Bottom,
+            //    Minimum = 0,
+            //    Maximum = 50,
+            //    AbsoluteMinimum = 0,
+            //    AbsoluteMaximum = 50
+            //});
 
             return plotModel;
         }
 
         public void RefreshPlotModel(List<ThreadInfo> threadInfos, PlotModel threadPlotModel)
         {
-            var colorPicker = new ColorPicker();
+            //var colorPicker = new ColorPicker();
 
             ReverseList(threadInfos);
 
@@ -100,73 +100,73 @@ namespace WorkWithThreadsWinApi
             if (!threadInfos.Any())
                 return;
 
-            AddToGraph(threadInfos);
-            CutLastValues();
+            //AddToGraph(threadInfos);
+            //CutLastValues();
 
-            //var times = new List<BarItem>();
-            //var ids = new List<string>();
+            var times = new List<BarItem>();
+            var ids = new List<string>();
 
-            //foreach (var threadInfo in threadInfos)
-            //{
-            //    times.Add(new BarItem(threadInfo.ProcUsage));
-            //    ids.Add(threadInfo.Id.ToString());
-            //}
-
-            //threadPlotModel.Series.Add(new BarSeries { ItemsSource = times });
-
-            //threadPlotModel.Axes.Add(new CategoryAxis
-            //{
-            //    Position = AxisPosition.Left,
-            //    Key = "CakeAxis",
-            //    ItemsSource = ids
-            //});
-            //threadPlotModel.Axes.Add(new LinearAxis
-            //{
-            //    Position = AxisPosition.Bottom,
-            //    Minimum = 0,
-            //    Maximum = 100
-            //});
-
-            var linearSeries = new List<LineSeries>();
-
-            for (var i = 0; i < _values.Count; i++)
+            foreach (var threadInfo in threadInfos)
             {
-                var graph = _values[i];
-                linearSeries.Add(new LineSeries());
-                for (var j = 0; j < graph.Count; j++)
-                {
-                    linearSeries[i].Points.Add(new DataPoint(25 - j, graph[(graph.Count - 1) - j]));
-                }
+                times.Add(new BarItem(threadInfo.ProcUsage));
+                ids.Add(threadInfo.Id.ToString());
             }
 
-            for (var i = 0; i < linearSeries.Count; i++)
-            {
-                linearSeries[i].Color = colorPicker.GetNextColor();
-                linearSeries[i].Title = threadInfos[i].Id.ToString();
-            }
+            threadPlotModel.Series.Add(new BarSeries { ItemsSource = times });
 
-            foreach (var series in linearSeries)
-            {
-                threadPlotModel.Series.Add(series);
-            }
-
-            threadPlotModel.Axes.Add(new LinearAxis
+            threadPlotModel.Axes.Add(new CategoryAxis
             {
                 Position = AxisPosition.Left,
                 Key = "CakeAxis",
-                Minimum = 0,
-                AbsoluteMaximum = 100,
-                AbsoluteMinimum = 0,
-                Maximum = 100
+                ItemsSource = ids
             });
             threadPlotModel.Axes.Add(new LinearAxis
             {
                 Position = AxisPosition.Bottom,
                 Minimum = 0,
-                Maximum = 50,
-                AbsoluteMinimum = 0,
-                AbsoluteMaximum = 50
+                Maximum = 100
             });
+
+            //var linearSeries = new List<LineSeries>();
+
+            //for (var i = 0; i < _values.Count; i++)
+            //{
+            //    var graph = _values[i];
+            //    linearSeries.Add(new LineSeries());
+            //    for (var j = 0; j < graph.Count; j++)
+            //    {
+            //        linearSeries[i].Points.Add(new DataPoint(25 - j, graph[(graph.Count - 1) - j]));
+            //    }
+            //}
+
+            //for (var i = 0; i < linearSeries.Count; i++)
+            //{
+            //    linearSeries[i].Color = colorPicker.GetNextColor();
+            //    linearSeries[i].Title = threadInfos[i].Id.ToString();
+            //}
+
+            //foreach (var series in linearSeries)
+            //{
+            //    threadPlotModel.Series.Add(series);
+            //}
+
+            //threadPlotModel.Axes.Add(new LinearAxis
+            //{
+            //    Position = AxisPosition.Left,
+            //    Key = "CakeAxis",
+            //    Minimum = 0,
+            //    AbsoluteMaximum = 100,
+            //    AbsoluteMinimum = 0,
+            //    Maximum = 100
+            //});
+            //threadPlotModel.Axes.Add(new LinearAxis
+            //{
+            //    Position = AxisPosition.Bottom,
+            //    Minimum = 0,
+            //    Maximum = 50,
+            //    AbsoluteMinimum = 0,
+            //    AbsoluteMaximum = 50
+            //});
 
 
             threadPlotModel.InvalidatePlot(true);
