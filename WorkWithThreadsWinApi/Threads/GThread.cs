@@ -121,6 +121,10 @@ namespace WorkWithThreadsWinApi.Threads
             //double pi = 0;
             while (CanceledFlag)
             {
+                var notMatter = 0.0;
+                for (double j = 0; j < 100000; j++)
+                    notMatter += (j*j)/j;
+
                 // ReSharper disable once CompareOfFloatsByEqualityOperator
                 threadParam.Pi += ((1.0 / (1.0 + 2.0 * i)) * ((i % 2 == 0) ? 1 : (-1))) * 4;
                 i++;

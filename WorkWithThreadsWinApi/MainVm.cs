@@ -18,6 +18,7 @@ namespace WorkWithThreadsWinApi
         private ObservableCollection<ThreadPriorityLevel> _threadPriorities;
         private ThreadPriorityLevel _selectedThreadPriority;
         private PlotModel _threadPlotModel;
+        private double _commonPi;
 
         private Timer _timer;
         private readonly PlotDataFormer _dataFormer;
@@ -85,6 +86,16 @@ namespace WorkWithThreadsWinApi
             }
         }
 
+        public double CommonPi
+        {
+            get { return _commonPi; }
+            set
+            {
+                _commonPi = value;
+                OnPropertyChanged();
+            }
+        }
+
         public MainVm()
         {
             Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.High;
@@ -111,6 +122,12 @@ namespace WorkWithThreadsWinApi
                 }
 
                 _dataFormer.RefreshPlotModel(Threads.ToList(), ThreadPlotModel);
+
+                var commonPi = 0.0;
+                foreach (var threadInfo in Threads)
+                    commonPi += threadInfo.Pi;
+
+                CommonPi = commonPi / Threads.Count;
             }
         }
 
